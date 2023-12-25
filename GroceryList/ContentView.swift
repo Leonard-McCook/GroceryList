@@ -5,11 +5,14 @@
 //  Created by Leonard McCook-Carr on 12/21/23.
 //
 
+import SwiftData
 import SwiftUI
 
 struct ContentView: View {
     @Environment(\.modelContext) var context
     @State var newItemString = ""
+    
+    @Query var items: [GroceryListItem]
     
     var body: some View {
         NavigationView {
@@ -27,12 +30,22 @@ struct ContentView: View {
                                                   date: Date())
                     
                     context.insert(newItem)
+                    
+                    newItemString = ""
                 }
                 
                 List {
-                    
+                    ForEach(items) { item in
+                        Text(item.title)
+                    }
+                }
+                .overlay {
+                    if items.isEmpty {
+                        Text("No Items")
+                    }
                 }
             }
+            .navigationTitle("Grocery List")
         }
     }
 }
