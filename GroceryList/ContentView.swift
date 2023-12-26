@@ -38,6 +38,11 @@ struct ContentView: View {
                     ForEach(items) { item in
                         Text(item.title)
                     }
+                    .onDelete { indexSet in
+                        indexSet.forEach({ index in
+                            context.delete(items[index])
+                        })
+                    }
                 }
                 .overlay {
                     if items.isEmpty {
