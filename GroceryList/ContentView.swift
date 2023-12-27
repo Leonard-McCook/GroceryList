@@ -19,6 +19,7 @@ struct ContentView: View {
             VStack {
                 TextField("Add item", text: $newItemString)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding()
                 
                 Button("Save") {
                     guard !newItemString.isEmpty else {
@@ -50,7 +51,7 @@ struct ContentView: View {
                     }
                 }
             }
-            .navigationTitle("Grocery List")
+            .navigationTitle("Shopping List")
         }
     }
 }
